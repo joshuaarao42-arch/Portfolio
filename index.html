@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interview — Candidate Profile</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-logo">Joshua Arao</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#confession">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- SECTION 1: HERO -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <span class="hero-label">Candidate Profile / 2026</span>
+                    <h1>
+                        Hello, I'm
+                        <span>Joshua</span>
+                    </h1>
+                    <p class="hero-desc">
+                        First-year BS Computer Science student based in Cagayan de Oro.
+                        I build full-stack web apps, tinker with terminal-style interfaces.
+                        "Hinay-hinay pero kanunay" is my motto, and I live by it in both code and life.
+                    </p>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="orbit-container">
+                        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+                        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+                        <div class="orbit-ring"><div class="orbit-dot"></div></div>
+
+                        <div class="center-portrait">
+                            <img src="images/joshua.jpg" alt="Joshua">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-hint">
+            <span>Scroll to explore</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: ABOUT -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-num">01 / About</span>
+                <h2 class="section-title">A bit about<br>who I am</h2>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <p>
+                        I'm a CS1B student in USTP CDO who spends most of my free time building things and doing random side projects. I've shipped
+                        a budget tracker, a fare calculator, a password manager. I like taking an idea from a
+                        blank page to something people can actually use. Outside of codes and screens, I live on my
+                        own and figure things out as I go.
+                    </p>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card reveal">
+                        <div class="stat-num">1st</div>
+                        <div class="stat-label">Year, BS Computer Science</div>
+                    </div>
+
+                    <div class="stat-card reveal">
+                        <div class="stat-num">CDO</div>
+                        <div class="stat-label">Based in Cagayan de Oro</div>
+                    </div>
+
+                    <div class="stat-card reveal">
+                        <div class="stat-num">3</div>
+                        <div class="stat-label">Personal projects shipped</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: SKILLS -->
+    <section class="skills" id="skills">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-num">02 / Skills</span>
+                <h2 class="section-title">What I bring<br>to the table</h2>
+            </div>
+
+            <div class="skills-list">
+                <div class="skill-item reveal" data-width="95">
+                    <span class="skill-name">Full-stack development</span>
+                    <div class="skill-bar">
+                        <div class="skill-fill"></div>
+                    </div>
+                    <span class="skill-pct">95%</span>
+                </div>
+
+                <div class="skill-item reveal" data-width="90">
+                    <span class="skill-name">Debugging at 10pm</span>
+                    <div class="skill-bar">
+                        <div class="skill-fill"></div>
+                    </div>
+                    <span class="skill-pct">90%</span>
+                </div>
+
+                <div class="skill-item reveal" data-width="85">
+                    <span class="skill-name">Making a plan and sticking to it</span>
+                    <div class="skill-bar">
+                        <div class="skill-fill"></div>
+                    </div>
+                    <span class="skill-pct">85%</span>
+                </div>
+
+                <div class="skill-item reveal" data-width="100">
+                    <span class="skill-name">Caring about the people around me</span>
+                    <div class="skill-bar">
+                        <div class="skill-fill"></div>
+                    </div>
+                    <span class="skill-pct">100%</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: EXPERIENCE -->
+    <section class="experience" id="experience">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-num">03 / Experience</span>
+                <h2 class="section-title">My journey<br>so far</h2>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">Year One</div>
+                    <div class="timeline-role">Starting CS1B</div>
+                    <div class="timeline-company">Where the late nights began</div>
+                    <div class="timeline-desc">
+                        Learned to build real things instead of just reading about them —
+                        one project, one bug fix, one deploy at a time.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Along the Way</div>
+                    <div class="timeline-role">Building, Breaking, Fixing</div>
+                    <div class="timeline-company">Projects, thesis, everything in between</div>
+                    <div class="timeline-desc">
+                        Somewhere between deployments and defense prep, one meeting stuck
+                        with me more than the rest.
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-date">Right Now</div>
+                    <div class="timeline-role">The Realization</div>
+                    <div class="timeline-company">This very moment</div>
+                    <div class="timeline-desc">
+                        I've tried to play it cool. But I can't pretend anymore.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: THE SHIFT -->
+    <section class="shift" id="shift">
+        <div class="container">
+            <p class="shift-text">
+                But here's the thing about interviews...<br><br>
+
+                Sometimes the most important answers<br>
+                aren't found in a <span class="highlight">resume</span>.<br><br>
+
+                They're found in the courage to say<br>
+                what you really feel.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECTION 6: THE QUESTION -->
+    <section class="question" id="question">
+        <div class="container">
+            <div class="question-card reveal">
+                <div class="question-label">Final Question</div>
+
+                <h2 class="question-text">
+                    "Before we conclude this interview,
+                    is there anything else you'd like to share
+                    that isn't on your application?"
+                </h2>
+
+                <a href="#confession" class="answer-btn">
+                    <span>View My Answer →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 7: THE CONFESSION -->
+    <section class="confession" id="confession">
+        <div class="container">
+            <div class="confession-content">
+
+                <div class="confession-pretitle" id="confPretitle">
+                    The truth is...
+                </div>
+
+                <h2 class="confession-title" id="confTitle">
+                    I like you,<br>
+                    <span class="name">Lian</span>
+                </h2>
+
+                <div class="confession-body" id="confBody">
+                    <p>
+                        I built this entire website para ma istorya nako ang akong gi tago na gi bati lately
+                    </p>
+
+                    <p>
+                        There's a lot I still haven't told you, small things I've noticed, thoughts I've kept to myself. I'd rather not put all of it on a webpage. Some things are better said face to face.
+                    </p>
+
+                    <p>
+                        I'm not expecting anything from you right now, and there's no rush. I just didn't want this to stay unsaid anymore.
+                    </p>
+
+                    <p>
+                        If you're curious about the rest, no pressure at all, maybe we could just talk sometime during vacants or after class, or whenever we happen to bump into each other around school. Nothing formal, no plans needed. I think the rest of this is a conversation, not a confession.
+                    </p>
+                </div>
+
+                <!-- SPOTIFY PLAYLIST — CONFESSION ONLY -->
+                <div class="spotify-playlist" id="spotifyCard">
+
+                    <div class="spotify-playlist-heading">
+                        <span class="spotify-playlist-kicker">
+                            A little something for you
+                        </span>
+
+                        <h3>
+                            Hear What I Can't Say.
+                        </h3>
+
+                        <p>
+                            I put a few song po, that felt right for this.
+                            No pressure! just press play if you want to.
+                        </p>
+                    </div>
+
+                    <div class="spotify-embed-wrap">
+                        <iframe
+                            src="https://open.spotify.com/embed/playlist/7nDp8jE5JM52xRipfjOm68?utm_source=generator"
+                            width="100%"
+                            height="352"
+                            frameborder="0"
+                            allowfullscreen=""
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                            title="Spotify playlist">
+                        </iframe>
+                    </div>
+
+                    <a
+                        class="spotify-open-link"
+                        href="https://open.spotify.com/playlist/7nDp8jE5JM52xRipfjOm68?si=_MAjhOPgTreW3KDhKhpoCw"
+                        target="_blank"
+                        rel="noopener noreferrer">
+                        Open the playlist in Spotify ↗
+                    </a>
+
+                </div>
+
+                <div class="confession-signature" id="confSig">
+                    — Joshua
+                </div>
+
+                <div class="heart-container" id="confHeart">
+                    <div class="heart">
+                        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                        </svg>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 8: THE REMAINING -->
+    <section class="remaining" id="remaining">
+        <div class="container">
+            <div class="remaining-content">
+
+                <span class="confession-pretitle reveal">
+                    One more thing
+                </span>
+
+                <h2 class="section-title reveal" style="margin-bottom:48px;">
+                    This confession is
+                </h2>
+
+                <div class="meter-wrap reveal">
+                    <div class="meter-track">
+                        <div class="meter-fill" id="meterFill"></div>
+                        <div class="meter-marker" id="meterMarker">90%</div>
+                    </div>
+
+                    <div class="meter-labels">
+                        <span>Said here</span>
+                        <span>Said in person</span>
+                    </div>
+                </div>
+
+                <p class="remaining-note reveal">
+                    The last 10% isn't missing — I'm just saving it.
+                    Some words lose meaning typed on a screen. Those, I'd rather say
+                    looking at you, not through a browser tab.
+                </p>
+
+                <button class="lock-btn reveal" id="lockBtn">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="5" y="11" width="14" height="9" rx="2"></rect>
+                        <path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+                    </svg>
+
+                    <span id="lockBtnText">
+                        tap the last 10%
+                    </span>
+                </button>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 9: THE WAIT -->
+    <section class="thewait" id="thewait">
+        <div class="container">
+            <div class="thewait-content">
+
+                <span class="confession-pretitle reveal">
+                    Something we both know
+                </span>
+
+                <h2 class="section-title reveal" style="margin-bottom:32px;">
+                    Strict parents  <br>raised us both
+                </h2>
+
+                <div class="thewait-body reveal">
+                    <p>
+                        I'm not naive about this. We both grew up with rules, curfews,
+                        and parents who ask a lot of questions. I know what it's like
+                        to weigh every decision against before it
+                        even happens.
+                    </p>
+
+                    <p>
+                        So no, I'm not in a hurry. I'd rather this go slow and stay
+                        respectful than be fast and cause you problems at home.
+                        Whatever pace you need, whatever boundaries your family has,
+                        I'll work around them, not against them po.
+                    </p>
+
+                    <p>
+                        "Hinay-hinay pero kanunay" 
+                        That's not just a line on my portfolio Lian or my daily motto,
+                        it's how I mean this too.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
