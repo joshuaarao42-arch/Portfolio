@@ -218,6 +218,64 @@ section {
     display: block;
 }
 
+.earth {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    position: relative;
+    overflow: hidden;
+    background:
+        radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0) 12%),
+        radial-gradient(circle at 30% 32%, #6fc2ff 0%, #2e86e8 35%, #1257b8 65%, #0a3a80 100%);
+    box-shadow:
+        inset -16px -16px 32px rgba(0, 10, 40, 0.6),
+        inset 10px 10px 22px rgba(220, 245, 255, 0.3),
+        0 0 30px 4px rgba(80, 160, 255, 0.5),
+        0 0 70px 16px rgba(50, 120, 230, 0.3);
+}
+
+.earth::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image:
+        radial-gradient(circle at 22% 30%, #4d8a3f 0%, #4d8a3f 9%, transparent 10%),
+        radial-gradient(circle at 33% 22%, #5fa04a 0%, #5fa04a 7%, transparent 8%),
+        radial-gradient(circle at 20% 55%, #3f7a35 0%, #3f7a35 10%, transparent 11%),
+        radial-gradient(circle at 38% 62%, #6bab52 0%, #6bab52 6%, transparent 7%),
+        radial-gradient(circle at 60% 20%, #4d8a3f 0%, #4d8a3f 8%, transparent 9%),
+        radial-gradient(circle at 72% 35%, #5fa04a 0%, #5fa04a 11%, transparent 12%),
+        radial-gradient(circle at 65% 55%, #3f7a35 0%, #3f7a35 7%, transparent 8%),
+        radial-gradient(circle at 80% 65%, #6bab52 0%, #6bab52 6%, transparent 7%),
+        radial-gradient(circle at 45% 78%, #4d8a3f 0%, #4d8a3f 8%, transparent 9%),
+        radial-gradient(circle at 25% 80%, #d9c98a 0%, #d9c98a 4%, transparent 5%);
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    opacity: 0.9;
+    animation: earth-rotate 18s linear infinite;
+}
+
+.earth::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background-image:
+        radial-gradient(ellipse 22% 8% at 15% 40%, rgba(255,255,255,0.85) 0%, transparent 70%),
+        radial-gradient(ellipse 28% 10% at 55% 25%, rgba(255,255,255,0.7) 0%, transparent 70%),
+        radial-gradient(ellipse 20% 7% at 70% 60%, rgba(255,255,255,0.75) 0%, transparent 70%),
+        radial-gradient(ellipse 26% 9% at 35% 75%, rgba(255,255,255,0.6) 0%, transparent 70%);
+    background-repeat: no-repeat;
+    opacity: 0.6;
+    animation: earth-rotate 26s linear infinite reverse;
+}
+
+@keyframes earth-rotate {
+    from { transform: translateX(0) rotate(0deg); }
+    to { transform: translateX(-6%) rotate(360deg); }
+}
+
 @keyframes orbit-rotate {
     from {
         transform: rotate(0deg);
@@ -1132,7 +1190,16 @@ section {
 @media (max-width: 768px) {
 
     section {
-        padding: 80px 24px;
+        padding: 72px 20px;
+        min-height: unset;
+    }
+
+    .hero {
+        min-height: 100vh;
+    }
+
+    .container {
+        padding: 0;
     }
 
     nav {
@@ -1180,9 +1247,24 @@ section {
         grid-template-columns: 1fr;
     }
 
+    .skill-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
     .skill-name {
-        width: 120px;
-        font-size: 16px;
+        width: 100%;
+        font-size: 17px;
+    }
+
+    .skill-bar {
+        width: 100%;
+    }
+
+    .skill-pct {
+        width: auto;
+        align-self: flex-end;
     }
 
     .timeline {
@@ -1222,4 +1304,52 @@ section {
 .reveal.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+@media (max-width: 400px) {
+
+    section {
+        padding: 56px 16px;
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .hero-desc {
+        font-size: 15px;
+    }
+
+    .orbit-container {
+        width: 200px;
+        height: 200px;
+    }
+
+    .center-portrait {
+        width: 100px;
+        height: 100px;
+    }
+
+    .question-text {
+        font-size: 26px;
+    }
+
+    .confession-title {
+        font-size: 36px;
+    }
+
+    .confession-body {
+        font-size: 16px;
+    }
+
+    .dossier-title {
+        font-size: 14px;
+    }
+
+    .answer-btn,
+    .lock-btn,
+    .wait-btn {
+        width: 100%;
+        justify-content: center;
+    }
 }
