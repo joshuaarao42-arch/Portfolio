@@ -1,4 +1,3 @@
-// ─── Progress Bar ───
 window.addEventListener('scroll', () => {
     const winScroll = document.documentElement.scrollTop;
     const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
@@ -8,7 +7,6 @@ window.addEventListener('scroll', () => {
 });
 
 
-// ─── Reveal on Scroll ───
 const observerOptions = {
     threshold: 0.15,
     rootMargin: '0px 0px -50px 0px'
@@ -20,8 +18,7 @@ const revealObserver = new IntersectionObserver((entries) => {
 
             entry.target.classList.add('visible');
 
-            // Animate skill bars
-            if (entry.target.classList.contains('skill-item')) {
+           if (entry.target.classList.contains('skill-item')) {
                 const fill = entry.target.querySelector('.skill-fill');
                 const width = entry.target.dataset.width;
 
@@ -38,7 +35,6 @@ document.querySelectorAll('.reveal, .timeline-item').forEach(el => {
 });
 
 
-// ─── Shift Section ───
 const shiftObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -54,7 +50,6 @@ document.querySelectorAll('.shift-text').forEach(el => {
 });
 
 
-// ─── Confession Section ───
 const confessionObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
 
@@ -66,10 +61,8 @@ const confessionObserver = new IntersectionObserver((entries) => {
             document.getElementById('confSig').classList.add('visible');
             document.getElementById('confHeart').classList.add('visible');
 
-            // Reveal the Spotify playlist only inside the confession
             document.getElementById('spotifyCard').classList.add('visible');
 
-            // Start the floating particles
             document.getElementById('particles').classList.add('active');
         }
     });
@@ -84,7 +77,6 @@ if (confessionSection) {
 }
 
 
-// ─── Create Floating Particles ───
 function createParticles() {
 
     const container = document.getElementById('particles');
@@ -107,7 +99,6 @@ function createParticles() {
 createParticles();
 
 
-// ─── Smooth Scroll for Anchor Links ───
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
     anchor.addEventListener('click', function(e) {
@@ -126,7 +117,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 
-// ─── Parallax Effect on Hero ───
 window.addEventListener('scroll', () => {
 
     const scrolled = window.pageYOffset;
@@ -138,38 +128,70 @@ window.addEventListener('scroll', () => {
 });
 
 
-// ─── The Remaining Section: Courage Meter ───
-const remainingObserver = new IntersectionObserver((entries) => {
+(function () {
 
-    entries.forEach(entry => {
+    const cards = document.querySelectorAll('.dossier-card');
+    const details = document.querySelectorAll('.dossier-detail');
+    const dossierFinal = document.getElementById('dossierFinal');
 
-        if (entry.isIntersecting) {
+    if (!cards.length) return;
 
-            const fill = document.getElementById('meterFill');
-            const marker = document.getElementById('meterMarker');
+    const opened = new Set();
+    let meterPlayed = false;
 
-            setTimeout(() => {
-                fill.style.width = '90%';
-                marker.style.left = '90%';
-                marker.classList.add('visible');
-            }, 300);
+    function playMeter() {
+        if (meterPlayed) return;
+        meterPlayed = true;
 
-            remainingObserver.unobserve(entry.target);
-        }
+        const fill = document.getElementById('meterFill');
+        const marker = document.getElementById('meterMarker');
+
+        setTimeout(() => {
+            fill.style.width = '90%';
+            marker.style.left = '90%';
+            marker.classList.add('visible');
+        }, 200);
+    }
+
+    cards.forEach(card => {
+
+        card.addEventListener('click', () => {
+
+            const target = card.dataset.target;
+            const isActive = card.classList.contains('active');
+
+            cards.forEach(c => c.classList.remove('active'));
+            details.forEach(d => d.classList.remove('active'));
+
+            if (!isActive) {
+                card.classList.add('active');
+                card.classList.add('opened');
+
+                const detail = document.querySelector(
+                    `.dossier-detail[data-detail="${target}"]`
+                );
+
+                if (detail) {
+                    detail.classList.add('active');
+                }
+
+                if (target === 'tenpercent') {
+                    playMeter();
+                }
+
+                opened.add(target);
+
+                if (opened.size === details.length && dossierFinal) {
+                    setTimeout(() => {
+                        dossierFinal.classList.add('visible');
+                    }, 500);
+                }
+            }
+        });
     });
-
-}, {
-    threshold: 0.4
-});
-
-const remainingSection = document.querySelector('.remaining');
-
-if (remainingSection) {
-    remainingObserver.observe(remainingSection);
-}
+})();
 
 
-// ─── Lock Button ───
 const lockBtn = document.getElementById('lockBtn');
 const lockBtnText = document.getElementById('lockBtnText');
 
@@ -196,5 +218,34 @@ if (lockBtn) {
             lockMessages[lockClicks % lockMessages.length];
 
         lockClicks++;
+    });
+}
+
+
+const waitBtn = document.getElementById('waitBtn');
+const waitBtnText = document.getElementById('waitBtnText');
+const waitNote = document.getElementById('waitNote');
+
+if (waitBtn) {
+
+    let waited = false;
+
+    waitBtn.addEventListener('click', () => {
+
+        if (waited) return;
+        waited = true;
+
+        waitBtn.classList.add('waiting');
+        waitBtnText.textContent = '...';
+
+        setTimeout(() => {
+            waitBtn.classList.remove('waiting');
+            waitBtn.classList.add('done');
+            waitBtnText.textContent = 'okay';
+
+            if (waitNote) {
+                waitNote.classList.add('visible');
+            }
+        }, 1100);
     });
 }
