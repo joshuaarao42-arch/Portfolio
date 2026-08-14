@@ -1529,6 +1529,51 @@ section {
 
 @media (max-width: 768px) {
 
+    .grain {
+        display: none;
+    }
+
+    nav {
+        mix-blend-mode: normal;
+        background: rgba(10, 10, 10, 0.85);
+    }
+
+    .orbit-ring {
+        animation: none;
+    }
+
+    .confession-modal-backdrop {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .confession-modal-backdrop::before {
+        animation: none;
+        opacity: 0.75;
+    }
+
+    .confession-modal-backdrop.open::before {
+        opacity: 0.75;
+    }
+
+    .curtain {
+        box-shadow: none;
+        transition-duration: 0.7s;
+    }
+
+    .curtain-right {
+        box-shadow: none;
+    }
+
+    .spotify-playlist {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .particle {
+        animation-duration: 14s !important;
+    }
+
     section {
         padding: 72px 20px;
         min-height: unset;
