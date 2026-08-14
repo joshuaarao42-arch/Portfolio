@@ -11,6 +11,11 @@
 
     <div class="progress-bar" id="progressBar"></div>
 
+    <div class="grain" aria-hidden="true"></div>
+
+    <div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+    <div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+
     <div class="particles" id="particles"></div>
 
      <nav>
@@ -19,7 +24,6 @@
             <li><a href="#about">About</a></li>
             <li><a href="#skills">Skills</a></li>
             <li><a href="#experience">Experience</a></li>
-            <li><a href="#confession">Contact</a></li>
         </ul>
     </nav>
 
@@ -45,10 +49,13 @@
                         <div class="orbit-ring"><div class="orbit-dot"></div></div>
                         <div class="orbit-ring"><div class="orbit-dot"></div></div>
 
-                        <div class="center-portrait">
-                            <div class="earth"></div>
+                        <div class="webgl-hero" id="webglHero">
+                            <div class="center-portrait">
+                                <div class="earth"></div>
+                            </div>
                         </div>
                     </div>
+                    <span class="hero-visual-hint">drag to spin</span>
                 </div>
             </div>
         </div>
@@ -186,9 +193,6 @@
 
                 Sometimes the most important answers<br>
                 aren't found in a <span class="highlight">resume</span>.<br><br>
-
-                They're found in the courage to say<br>
-                what you really feel.
             </p>
         </div>
     </section>
@@ -204,15 +208,24 @@
                     that isn't on your application?"
                 </h2>
 
-                <a href="#confession" class="answer-btn">
+                <button type="button" class="answer-btn" id="viewAnswerBtn">
                     <span>View My Answer →</span>
-                </a>
+                </button>
             </div>
         </div>
     </section>
 
-    <section class="confession" id="confession">
-        <div class="container">
+    <div class="confession-modal-backdrop" id="confessionModal">
+        <div class="curtain curtain-left" aria-hidden="true"></div>
+        <div class="curtain curtain-right" aria-hidden="true"></div>
+        <div class="confession-modal-panel">
+            <button type="button" class="confession-modal-close" id="confessionModalClose" aria-label="Close">
+                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="5" y1="5" x2="19" y2="19"></line>
+                    <line x1="19" y1="5" x2="5" y2="19"></line>
+                </svg>
+            </button>
+
             <div class="confession-content">
 
                 <div class="confession-pretitle" id="confPretitle">
@@ -238,7 +251,7 @@
                     </p>
 
                     <p>
-                        If you're curious about the rest, no pressure at all, maybe we could just talk sometime during vacants or after class, or whenever we happen to bump into each other around school, or at your convenience. Nothing formal, no plans needed.  
+                        If you're curious about the rest, no pressure at all; maybe we could just talk sometime during vacats or after class, or at your convenience. Nothing formal, no plans needed.  
                     </p>
                 </div>
 
@@ -254,8 +267,8 @@
                         </h3>
 
                         <p>
-                            I put a few song po, that felt right for this.
-                            No pressure! just press play if you want to.
+                            I put a few song picks that felt right for this.
+                            No pressure! Just press play if you want to.
                         </p>
                     </div>
 
@@ -294,28 +307,23 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </section>
+                <div class="confession-appendix" id="appendix">
+                    <div class="appendix-content">
 
-   <section class="appendix" id="appendix">
-        <div class="container">
-            <div class="appendix-content">
+                        <span class="confession-pretitle reveal">
+                            Before I go
+                        </span>
 
-                <span class="confession-pretitle reveal">
-                    Before I go
-                </span>
+                        <h2 class="section-title reveal" style="margin-bottom:20px;">
+                            A few more notes
+                        </h2>
 
-                <h2 class="section-title reveal" style="margin-bottom:20px;">
-                    A few more notes
-                </h2>
+                        <p class="appendix-lede reveal">
+                            Four small things I didn't want to bury in one long paragraph.
+                            Read them in whatever order feels right.
+                        </p>
 
-                <p class="appendix-lede reveal">
-                    Four small things I didn't want to bury in one long paragraph.
-                    Read them in whatever order feels right.
-                </p>
-
-                <div class="dossier-grid reveal">
+                        <div class="dossier-grid reveal">
                     <button class="dossier-card" data-target="tenpercent">
                         <span class="dossier-tab">01</span>
                         <span class="dossier-title">The Last 10%</span>
@@ -359,7 +367,7 @@
                         </div>
 
                         <p>
-                            The last 10% isn't missing, I'm just saving it.
+                            The last 10% isn't missing; I'm just saving it.
                             Some words lose meaning typed on a screen. Those, I'd rather say
                             looking at you, not through a browser tab.
                         </p>
@@ -408,7 +416,7 @@
                             waiting with a countdown quietly running in the background.
                             Just the kind where I don't disappear, and I don't wanna
                             pressure you,
-                            and I don't expect anythings until you're ready.
+                            and I don't expect anything until you're ready.
                         </p>
 
                         <p>
@@ -439,14 +447,18 @@
                         </div>
                     </div>
                     <p>
-                        Thank you for reading this far Lian ^^
+                        Thank you for reading this far, Lian ^^
                     </p>
+                </div>
+
+                    </div>
                 </div>
 
             </div>
         </div>
-    </section>
+    </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
