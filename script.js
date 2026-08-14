@@ -1,13 +1,32 @@
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matches;
 
-window.addEventListener('scroll', () => {
-    const winScroll = document.documentElement.scrollTop;
-    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-    const scrolled = (winScroll / height) * 100;
+(function initScrollEffects() {
+    const progressBar = document.getElementById('progressBar');
+    const hero = document.querySelector('.hero');
+    let ticking = false;
 
-    document.getElementById('progressBar').style.width = scrolled + '%';
-});
+    function update() {
+        ticking = false;
+
+        const winScroll = document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+        if (progressBar) progressBar.style.width = scrolled + '%';
+
+        if (hero && !isMobile && winScroll < window.innerHeight) {
+            hero.style.transform = `translateY(${winScroll * 0.3}px)`;
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            ticking = true;
+            requestAnimationFrame(update);
+        }
+    }, { passive: true });
+})();
 
 
 (function initCursor() {
@@ -87,7 +106,7 @@ window.addEventListener('scroll', () => {
 (function initHero3D() {
     const container = document.getElementById('webglHero');
     if (!container || typeof THREE === 'undefined') return;
-    if (prefersReducedMotion) return;
+    if (prefersReducedMotion || isMobile) return;
 
     const width = container.clientWidth;
     const height = container.clientHeight;
@@ -366,8 +385,9 @@ function createParticles() {
 
     const container = document.getElementById('particles');
     const particleColors = ['#c44569', '#6e9fd4', '#d4a574', '#6e9fd4'];
+    const count = isMobile ? 12 : 30;
 
-    for (let i = 0; i < 30; i++) {
+    for (let i = 0; i < count; i++) {
 
         const particle = document.createElement('div');
 
@@ -401,17 +421,6 @@ document.querySelectorAll('a[href^="#"]:not([href="#confession"])').forEach(anch
             });
         }
     });
-});
-
-
-window.addEventListener('scroll', () => {
-
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-
-    if (hero && scrolled < window.innerHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
 });
 
 
