@@ -106,7 +106,7 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
 (function initHero3D() {
     const container = document.getElementById('webglHero');
     if (!container || typeof THREE === 'undefined') return;
-    if (prefersReducedMotion || isMobile) return;
+    if (prefersReducedMotion) return;
 
     const width = container.clientWidth;
     const height = container.clientHeight;
@@ -114,7 +114,7 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
 
     let renderer;
     try {
-        renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer = new THREE.WebGLRenderer({ antialias: !isMobile, alpha: true, powerPreference: 'low-power' });
     } catch (err) {
         return;
     }
@@ -124,7 +124,7 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
     camera.position.z = 340;
 
     renderer.setSize(width, height);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, isMobile ? 1.5 : 2));
     renderer.domElement.setAttribute('aria-hidden', 'true');
     container.appendChild(renderer.domElement);
     container.classList.add('webgl-active');
@@ -132,17 +132,17 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
     const group = new THREE.Group();
     scene.add(group);
 
-    const coreGeo = new THREE.IcosahedronGeometry(102, 2);
+    const coreGeo = new THREE.IcosahedronGeometry(102, isMobile ? 1 : 2);
     const coreEdges = new THREE.EdgesGeometry(coreGeo);
     const coreMat = new THREE.LineBasicMaterial({ color: 0xd4a574, transparent: true, opacity: 0.5 });
     const core = new THREE.LineSegments(coreEdges, coreMat);
     group.add(core);
 
-    const glowGeo = new THREE.SphereGeometry(56, 32, 32);
+    const glowGeo = new THREE.SphereGeometry(56, isMobile ? 18 : 32, isMobile ? 18 : 32);
     const glowMat = new THREE.MeshBasicMaterial({ color: 0xfaf9f7, transparent: true, opacity: 0.07 });
     group.add(new THREE.Mesh(glowGeo, glowMat));
 
-    const particleCount = 240;
+    const particleCount = isMobile ? 90 : 240;
     const positions = new Float32Array(particleCount * 3);
     const colors = new Float32Array(particleCount * 3);
     const rose = new THREE.Color(0xc44569);
@@ -186,8 +186,11 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
     let parallaxY = 0;
     let idleTimer = null;
     let autoRotate = true;
+    let isVisible = true;
+    let rafId = null;
 
     container.style.cursor = 'grab';
+    container.style.touchAction = 'none';
 
     function wake() {
         autoRotate = false;
@@ -206,7 +209,7 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
     window.addEventListener('pointerup', () => {
         dragging = false;
         container.style.cursor = 'grab';
-    });
+    }, { passive: true });
 
     window.addEventListener('pointermove', (e) => {
         if (!dragging) return;
@@ -216,24 +219,42 @@ const isMobile = window.matchMedia('(max-width: 768px), (pointer: coarse)').matc
         lastY = e.clientY;
         baseRotY += dx * 0.006;
         group.rotation.x = Math.max(-0.6, Math.min(0.6, group.rotation.x + dy * 0.006));
-    });
+    }, { passive: true });
 
-    document.addEventListener('mousemove', (e) => {
-        if (dragging) return;
-        parallaxX = ((e.clientX / window.innerWidth) - 0.5) * 0.5;
-        parallaxY = ((e.clientY / window.innerHeight) - 0.5) * 0.3;
-    });
+    if (!isMobile) {
+        document.addEventListener('mousemove', (e) => {
+            if (dragging) return;
+            parallaxX = ((e.clientX / window.innerWidth) - 0.5) * 0.5;
+            parallaxY = ((e.clientY / window.innerHeight) - 0.5) * 0.3;
+        }, { passive: true });
+    }
 
     let hintShown = false;
-    container.addEventListener('mouseenter', () => {
+    container.addEventListener('pointerenter', () => {
         if (hintShown) return;
         hintShown = true;
         const hero = container.closest('.hero-visual');
         if (hero) hero.classList.add('hint-ready');
     });
 
+    // Only render while the hero is actually on screen and the tab is active —
+    // keeps things smooth instead of burning frames off-screen.
+    const visibilityObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { isVisible = entry.isIntersecting; });
+        if (isVisible && rafId === null) animate();
+    }, { threshold: 0.01 });
+    visibilityObserver.observe(container);
+
+    document.addEventListener('visibilitychange', () => {
+        if (!document.hidden && isVisible && rafId === null) animate();
+    });
+
     function animate() {
-        requestAnimationFrame(animate);
+        if (!isVisible || document.hidden) {
+            rafId = null;
+            return;
+        }
+        rafId = requestAnimationFrame(animate);
         if (autoRotate) baseRotY += 0.0022;
         group.rotation.y += (baseRotY + parallaxX - group.rotation.y) * 0.06;
         if (!dragging) {
